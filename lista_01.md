@@ -79,7 +79,7 @@ ______
 
 **5)** Qual a forma correta de definir uma classe Carro em JavaScript, com um método ligar() e um atributo marca?
 
-A) ![Uma imagem](assets/ex05_1.PNG)
+**~~A)~~ ![Uma imagem](assets/ex05_1.PNG)**
 
 B) ![Uma imagem](assets/ex05_2.PNG)
 
@@ -95,7 +95,7 @@ ______
 
 Qual será a saída do código acima?
 
-A) "Olá, meu nome é João. Olá, meu nome é Maria."
+**~A)~~ "Olá, meu nome é João. Olá, meu nome é Maria."**
 
 B) "Olá, meu nome é ."
 
@@ -119,7 +119,28 @@ Criando e manipulando Animais:
 - Para cada animal, chame o método descrever() para ver a descrição no console.
 
 Dica: Utilize `console.log()` para exibir as informações!
+```javascript
+//inicializa a classe animal
+class Animal {
+    //define os parametros que serão recebidos na instanciação
+    constructor(nome, idade) {
+        //atributos
+        this.nome = nome;
+        this.idade = idade;
+    }
+    //metodos
+    descrever() {
+        console.log(`Este é um ${this.nome} com ${this.idade} anos`)
+    }
+}
+//instancia a classe nos objetos cachorro e gato
+let cachorro = new Animal("cachorro", 8);
+let gato = new Animal("gato", 10);
 
+//chama o metodo dos objetos que exibe a mensagem no console
+cachorro.descrever();
+gato.descrever();
+```
 ______
 
 **8)** Nos últimos dias tivemos a oportunidade de ter contato com Programação Orientada a Objetos, e tivemos contato com o tema "herança". Herança é um princípio de orientação a objetos, que permite que classes compartilhem atributos e métodos. Ela é usada na intenção de reaproveitar código ou comportamento generalizado ou especializar operações ou atributos. Então vamos praticar esse conteúdo nessa questão.
@@ -144,8 +165,44 @@ Chamando os Métodos:
 - Para o gato, chame o método miar() para "ouvir" o som que ele faz (é também para ver o som no console).
 
 Dica: Utilize console.log() para exibir as informações!
+```javascript
+//inicializa a classe animal
+class Animal {
+    //define os parametros que serão recebidos na instanciação
+    constructor(nome, idade) {
+        //atributos
+        this.nome = nome;
+        this.idade = idade;
+    }
+    //metodos
+    descrever() {
+        console.log(`Este é um ${this.nome} com ${this.idade} anos`)
+    }
+}
 
+//inicializa a classe Gato que herda de Animal
+class Gato extends Animal {
+    //define os parametros que serão recebidos na instanciação
+    constructor(nome, idade, cor) {
+        //atributos herdados
+        super (nome, idade);
+        //atributo especifico
+        this.cor = cor;
+    }
+    //métodos
+    miar() {
+        console.log("Miau");
+    }
+}
+//instanciação dos objetos cachorro e gato
+let cachorro = new Animal("cachorro", 8);
+let gato = new Gato("gato", 10, "branco");
 
+//chamada dos metodos que exibem mensagens no console
+cachorro.descrever();
+gato.descrever();
+gato.miar();
+```
 ______
 
 **9)** Vamos criar um programa em JavaScript para somar notas!
@@ -167,7 +224,33 @@ Chamando o Método para Ver o Total:
 
 Dica: Utilize console.log() para exibir as informações!
 
+``` javascript
+//inicializa a classe SomadorDeNotas
+class SomadorDeNotas {
+    //define os parametros que serão recebidos na instanciação
+    constructor() {
+        //atributos
+        this.total = 0;
+    }
+    //metodos
+    adicionarNota(nota) {
+        this.total += nota;
+    }
+    verTotal() {
+        console.log(this.total);
+    }
+}
+//instanciação de SomadorDeNotas: somador
+let somador = new SomadorDeNotas();
+//chama o metodo que adiciona notas ao total
+somador.adicionarNota(6);
+somador.adicionarNota(10);
+somador.adicionarNota(3);
+somador.adicionarNota(9);
 
+//chama o metodo para exibir o total somado no console
+somador.verTotal()
+```
 ______
 
 **10)** Imagine que você está criando um programa em JavaScript para uma escola. Neste programa, existem diferentes tipos de funcionários, cada um com suas próprias características. Considere as seguintes classes:
@@ -188,3 +271,48 @@ Agora, sua tarefa é escrever um código em JavaScript que crie as classes Funci
 - Para cada objeto, chame o método calcularSalario() e mostre o salário calculado no console.
 
 Certifique-se de explicar cada parte do código utilizando comentários, explicando para que serve cada atributo e método, bem como a lógica por trás do cálculo de salário para o tipo de funcionário Professor.
+
+``` javascript
+//inicializa classe funcionario
+class Funcionario {
+    //define os parametros que serão recebidos na instanciação
+    constructor(nome,idade,salarioBase) {
+        //recebe nome do objeto funcionario
+        this.nome = nome;
+
+        //recebe idade do objeto funcionario
+        this.idade = idade;
+
+        //recebe o salario base do funcionario que será usado no metodo calcular salario das subclasses
+        this.salarioBase = salarioBase;
+    }
+    //metodo calcular salario que será herdado por Professor
+    calcularSalario() {}
+}
+
+//inicializa a classe Professor que herda de Funcionario
+class Professor extends Funcionario {
+    //define os parametros que serão recebidos na instanciação
+    constructor(nome, idade, salarioBase, horaAulaSemana) {
+        //herda os seguintes atributos de professor
+        super(nome,idade, salarioBase);
+        //atributo disciplina pertencente à professor
+        this.disciplina;
+
+        //recebe a quantidade de horas de aula por semana do professor para ser usado no metodo calcular salario
+        this.horaAulasSemana = horaAulaSemana;
+    }
+    //metodo que calcula o salario do professor multiplicando as horas de aula por semana pelo salario base e exibe no console
+    calcularSalario() {
+        console.log(`O salário desse professor é R$${this.horaAulasSemana*this.salarioBase},00`);
+    }
+}
+
+//instanciação dos professores com atributos ficticios
+let marcelo = new Professor("Marcelo", 27, 110, 40);
+let ana = new Professor("Ana", 32, 150, 30);
+
+//chamada do metodo calcularSalario, cujo resultado é exibido no console
+marcelo.calcularSalario();
+ana.calcularSalario();
+```
